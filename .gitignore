@@ -1,0 +1,18 @@
+# Python bytecode (compiled files)
+__pycache__/
+*.py[cod]
+
+# Virtual environments (if you use them)
+venv/
+env/
+.env
+
+# The Dataset (Keep your repo clean!)
+att_faces/
+
+# Generated plots (The code recreates them anyway)
+static/*.png
+
+# System files
+.DS_Store
+Thumbs.db
