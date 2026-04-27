@@ -1,4 +1,3 @@
-[Readme.md](https://github.com/user-attachments/files/27134544/Readme.md)
 Face Recognition using Eigenfaces (PCA) & SVM
 
 A computer vision project that implements facial recognition using Principal Component Analysis (PCA) and Support Vector Machines (SVM). This repository includes a data analysis pipeline and a Flask web dashboard for real-time testing.
