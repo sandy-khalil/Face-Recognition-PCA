@@ -9,14 +9,12 @@ using namespace cv;
 using namespace std;
 
 void loadDataset(const string& path, Mat& images, Mat& labels) {
-    /* Cascade loading disabled for performance
     CascadeClassifier face_cascade;
     string cascade_path = "/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml";
     if (!face_cascade.load(cascade_path)) {
         cerr << "Error: Could not load face cascade from " << cascade_path << endl;
         return;
     }
-    */
 
     DIR* dir = opendir(path.c_str());
     if (!dir) {
@@ -48,7 +46,6 @@ void loadDataset(const string& path, Mat& images, Mat& labels) {
                 Mat img = imread(img_path, IMREAD_GRAYSCALE);
                 if (img.empty()) continue;
 
-                /* Face detection disabled for performance (heavy)
                 vector<Rect> faces;
                 face_cascade.detectMultiScale(img, faces, 1.1, 4);
 
@@ -58,8 +55,8 @@ void loadDataset(const string& path, Mat& images, Mat& labels) {
                 } else {
                     face_img = img;
                 }
-                */
-                Mat face_img = img; // Use the image directly (AT&T dataset is pre-cropped)
+
+                resize(face_img, face_img, Size(92, 112));
                 
                 Mat flattened;
                 face_img.reshape(1, 1).convertTo(flattened, CV_32F);

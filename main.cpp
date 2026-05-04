@@ -25,7 +25,7 @@ struct GlobalState {
 } g_state;
 
 // Forward declarations
-json runFullAnalysis(string dataset_path, int n_components, float train_ratio, bool json_output, bool include_roc = false);
+json runFullAnalysis(string dataset_path, int n_components, float train_ratio, bool json_output, bool include_roc = true);
 json predictSingleImage(string image_path, bool json_output);
 void startServer();
 
@@ -248,7 +248,7 @@ void startServer() {
         float train_ratio = req.has_param("train_ratio") ? stof(req.get_param_value("train_ratio")) : 0.8f;
 
         try {
-            bool include_roc = req.has_param("include_roc") && req.get_param_value("include_roc") == "true";
+            bool include_roc = !req.has_param("include_roc") || req.get_param_value("include_roc") == "true";
             json result = runFullAnalysis("att_faces", n_components, train_ratio, true, include_roc);
             res.set_content(result.dump(), "application/json");
         } catch (const exception& e) {
@@ -278,7 +278,7 @@ void startServer() {
         try {
             // Auto-train if not trained
             if (!g_state.trained) {
-                runFullAnalysis("att_faces", 80, 0.8f, true, false);
+                runFullAnalysis("att_faces", 80, 0.8f, true, true);
             }
             json result = predictSingleImage(upload_path, true);
             res.set_content(result.dump(), "application/json");
