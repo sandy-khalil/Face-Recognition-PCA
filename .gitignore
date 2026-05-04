@@ -10,8 +10,11 @@ env/
 # The Dataset (Keep your repo clean!)
 att_faces/
 
-# Generated plots (The code recreates them anyway)
-static/*.png
+# C++ Build and Uploads
+build/
+uploads/
+*.csv
+*.png
 
 # System files
 .DS_Store
